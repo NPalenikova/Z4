@@ -85,5 +85,10 @@ for(let i = 0; i < 10; i++) {
     const img = document.createElement("img");
     img.src = data[i].path;
     img.classList.add("img-margin");
-    document.getElementById("gallery").appendChild(img);
+    const a = document.createElement("a");
+    a.href = data[i].path;
+    a.appendChild(img);
+    document.getElementById("gallery").appendChild(a);
 }
+
+lightGallery(document.getElementById('gallery'));
