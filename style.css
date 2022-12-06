@@ -1,5 +1,14 @@
 .img-margin {
     margin:10px;
-    height: 30%;
-    width: 30%;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#gallery{
+    border-radius: 25px;
+    background: lightgrey;
+    margin: 20px;
+    padding: 10px; 
 }
