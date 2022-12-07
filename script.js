@@ -1,4 +1,4 @@
-let data = [
+let pics = [
     {
         "filename":"1.jpg",
         "name": "Repkové pole",
@@ -82,13 +82,27 @@ let data = [
 ];
 
 for(let i = 0; i < 10; i++) {
-    const img = document.createElement("img");
-    img.src = data[i].path;
-    img.classList.add("img-margin");
-    const a = document.createElement("a");
-    a.href = data[i].path;
-    a.appendChild(img);
-    document.getElementById("gallery").appendChild(a);
+    const img = new Image();
+    img.src = pics[i].path;
+    /*const caption = document.createElement("div");
+    const h6 = document.createElement("h6");
+    h6.innerHTML = pics[i].name;
+    const p = document.createElement("p");
+    p.innerHTML = pics[i].description + pics[i].date + pics[i].coordinates;
+    caption.appendChild(h6, p);*/
+    const br = document.createElement("br");
+    const div = document.createElement("div");
+    div.classList.add("item");
+    div.setAttribute("data-src", pics[i].path);
+    div.setAttribute("data-sub-html", pics[i].name + "\n" + pics[i].description);
+    div.appendChild(img);
+    document.getElementById("gallery").appendChild(div);
 }
 
-lightGallery(document.getElementById('gallery'));
+lightGallery(document.getElementById('gallery'), {
+    selector: '.item',
+    mobileSettings: { controls: true, showCloseIcon: true, download: false},
+    slideShowInterval: 3000,
+    download: false,
+    plugins: [lgAutoplay, lgThumbnail],
+});

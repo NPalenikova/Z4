@@ -1,4 +1,9 @@
-.img-margin {
+.item{
+    height: 350px;
+    width: 350px;
+    margin: 0px;
+}
+.item img{
     margin:10px;
     height: 300px;
     width: 300px;
@@ -11,4 +16,10 @@
     background: lightgrey;
     margin: 20px;
     padding: 10px; 
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lg-backdrop{
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
