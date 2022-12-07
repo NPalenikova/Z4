@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/css/lightgallery-bundle.min.css" integrity="sha512-nUqPe0+ak577sKSMThGcKJauRI7ENhKC2FQAOOmdyCYSrUh0GnwLsZNYqwilpMmplN+3nO3zso8CWUgu33BDag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Galeria</title>
     </head>
-<body>
+<body class="indexBody">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Menu</a>
@@ -29,7 +29,15 @@
             </div>
         </div>
     </nav>
-    <div id="gallery" class="d-flex flex-row"></div>
+    <div class="row g-3 align-items-center ms-3 mt-5">
+        <div class="col-auto">
+            <label for="search" class="col-form-label">Search: </label>
+        </div>
+        <div class="col-auto">
+            <input type="text" id="search" class="form-control">
+        </div>
+    </div>
+    <div id="indexGallery" class="gallery d-flex flex-row"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/lightgallery.umd.min.js" integrity="sha512-6vFONv+JJD01XArGGqxABRY3Vsm8tKuemThmZYfha9inGIuqPU5OgZP1QizBf0Y3JGPnrofy3jokdebgYNNhEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/plugins/autoplay/lg-autoplay.min.js" integrity="sha512-oG7u2dCYcRZMqByim5wriswqGpgny7a8e6vhcQnGxtFVDQbbFZ9Oi/ShsVF+uN6FEGoyjhi9TotQn7gxAzfA6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/plugins/thumbnail/lg-thumbnail.min.js" integrity="sha512-cs5vRstvdBhVt5xFxjYtmbb3BF0fgVYwbBNsfAxFLGuRiRm/4PoKJvAt55KJtT8AvWOxDL4Xt/AVSE48geDjHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

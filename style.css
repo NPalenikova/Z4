@@ -11,15 +11,27 @@
     border-radius: 5px;
 }
 
-#gallery{
+#indexGallery {
     border-radius: 25px;
     background: lightgrey;
     margin: 20px;
     padding: 10px; 
     display: flex;
+    justify-content: center;
+    justify-items: center;
     flex-wrap: wrap;
 }
 
 .lg-backdrop{
     background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+#googleMap {
+    width: 90vw;
+    height: 80vh;
+    margin-left: 20px;
+}
+
+#mapGallery {
+    display: none;
 }

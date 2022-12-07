@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/css/lightgallery-bundle.min.css" integrity="sha512-nUqPe0+ak577sKSMThGcKJauRI7ENhKC2FQAOOmdyCYSrUh0GnwLsZNYqwilpMmplN+3nO3zso8CWUgu33BDag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="/style.css">
     <title>Mapa</title>
 </head>
-<body>
+<body class="mapBody">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Menu</a>
@@ -28,5 +30,24 @@
             </div>
         </div>
     </nav>
+    <div class="ms-2 mb-2 d-flex">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="toggleRoute">
+            <label class="form-check-label" for="toggleRoute">Turn on/off display of route between markers. </label>
+        </div>
+        <p id="totalDistance"></p>
+    </div>
+
+    <div id="googleMap"></div>
+    <div id="mapGallery" class="gallery"></div>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBqsijftd3FTMETLL5hi62aqMXGWizbuQ&callback=initMap&v=
+    weekly&libraries=places,directions" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/lightgallery.umd.min.js" integrity="sha512-6vFONv+JJD01XArGGqxABRY3Vsm8tKuemThmZYfha9inGIuqPU5OgZP1QizBf0Y3JGPnrofy3jokdebgYNNhEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/plugins/autoplay/lg-autoplay.min.js" integrity="sha512-oG7u2dCYcRZMqByim5wriswqGpgny7a8e6vhcQnGxtFVDQbbFZ9Oi/ShsVF+uN6FEGoyjhi9TotQn7gxAzfA6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/plugins/thumbnail/lg-thumbnail.min.js" integrity="sha512-cs5vRstvdBhVt5xFxjYtmbb3BF0fgVYwbBNsfAxFLGuRiRm/4PoKJvAt55KJtT8AvWOxDL4Xt/AVSE48geDjHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/script.js"></script>
+
 </body>
 </html>

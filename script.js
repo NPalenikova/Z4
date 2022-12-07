@@ -81,28 +81,185 @@ let pics = [
     }
 ];
 
-for(let i = 0; i < 10; i++) {
-    const img = new Image();
-    img.src = pics[i].path;
-    /*const caption = document.createElement("div");
-    const h6 = document.createElement("h6");
-    h6.innerHTML = pics[i].name;
-    const p = document.createElement("p");
-    p.innerHTML = pics[i].description + pics[i].date + pics[i].coordinates;
-    caption.appendChild(h6, p);*/
-    const br = document.createElement("br");
-    const div = document.createElement("div");
-    div.classList.add("item");
-    div.setAttribute("data-src", pics[i].path);
-    div.setAttribute("data-sub-html", pics[i].name + "\n" + pics[i].description);
-    div.appendChild(img);
-    document.getElementById("gallery").appendChild(div);
+var filteredPics = []
+var lightGal
+
+const createGalleryData = (images) => {
+    for(let i = 0; i < images.length; i++) {
+        const img = new Image();
+        img.src = images[i].path;
+        const div = document.createElement("div");
+        div.classList.add("item");
+        div.setAttribute("data-src", images[i].path);
+        div.setAttribute("data-sub-html",
+            `<div class="lightGallery-captions">
+                <h4>${images[i].name}</h4>
+                <p>${images[i].description}</p>
+                <p>Taken on ${images[i].date} at ${images[i].coordinates}</p>
+            </div>`);
+        div.appendChild(img);
+        document.querySelector(".gallery").appendChild(div);
+    }
 }
 
-lightGallery(document.getElementById('gallery'), {
-    selector: '.item',
-    mobileSettings: { controls: true, showCloseIcon: true, download: false},
-    slideShowInterval: 3000,
-    download: false,
-    plugins: [lgAutoplay, lgThumbnail],
-});
+const createGallery = (images) => {
+    createGalleryData(images)
+    lightGal = lightGallery(document.querySelector(".gallery"), {
+        selector: '.item',
+        mobileSettings: { controls: true, showCloseIcon: true, download: false},
+        slideShowInterval: 1000,
+        download: false,
+        plugins: [lgAutoplay, lgThumbnail],
+    });
+}
+if(document.querySelector("body").classList.value === 'indexBody') {
+    createGallery(pics)
+    var searchBar = document.getElementById("search")
+    searchBar.addEventListener("input", event => {
+        filterPictures()
+    })
+}
+
+const filterPictures = () => {
+    filteredPics = []
+    document.getElementById("indexGallery").innerHTML = ''
+    pics
+        .filter(image => image.name.indexOf(event.target.value) !== -1 || image.description.indexOf(event.target.value) !== -1)
+        .forEach(image => {
+            filteredPics.push(image)
+        })
+    createGallery(filteredPics)
+}
+
+//////////////////////////////////////////////////////////
+// Map
+//////////////////////////////////////////////////////////
+function initMap() {
+    var centerOfMap = new google.maps.LatLng(48.330220663664264, 12.657655859336842);
+    map = new google.maps.Map(document.getElementById('googleMap'), {
+        center: centerOfMap,
+        zoom: 5,
+    });
+    var directionsService = new google.maps.DirectionsService
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true
+    })
+
+    var pointA = new google.maps.LatLng(48.370037, 17.469789),
+        pointB = new google.maps.LatLng(46.80044876051801, 13.611891792061295),
+        pointC = new google.maps.LatLng(29.08107787842252, -13.473440256638664)
+    if(routeToggled) {
+        displayRoute(directionsService, directionsDisplay, pointA, pointB, pointC);
+    }
+    pics.forEach(image => {
+        var location = new google.maps.LatLng(image.coordinates[0], image.coordinates[1]);
+        const newMarker = new google.maps.Marker({
+            position: location,
+            map,
+        });
+        newMarker.addListener("click", () => {
+            openMarker(image)
+        })
+    })
+
+    directionsDisplay.addListener("directions_changed", () => {
+        const directions = directionsDisplay.getDirections();
+
+        if (directions) {
+            computeTotalDistance(directions);
+        }
+    });
+}
+
+const openMarker = (image) => {
+    filterPicturesByLocation(image.coordinates)
+}
+
+const filterPicturesByLocation = (location) => {
+    filteredPics = []
+    document.querySelector(".gallery").innerHTML = ''
+    pics
+        .filter(image => image.coordinates[0].toString().indexOf(location[0].toString()) !== -1 && image.coordinates[1].toString().indexOf(location[1].toString()) !== -1)
+        .forEach(image => {
+            filteredPics.push(image)
+        })
+    createGallery(filteredPics)
+    lightGal.openGallery(0)
+}
+
+var routeToggled = false
+if(document.querySelector("body").classList.value === 'mapBody') {
+    document.getElementById('toggleRoute').addEventListener('change', () => {
+        routeToggled = !routeToggled
+        document.getElementById('totalDistance').innerHTML = ''
+        initMap()
+    })
+}
+
+
+const fillWaypoints = () => {
+    var waypoints = []
+    pics.forEach(pic => {
+        waypoints.push({location: new google.maps.LatLng(pic.coordinates[0], pic.coordinates[1]), stopover: false})
+    })
+    return waypoints
+}
+
+function displayRoute(directionsService, directionsDisplay) {
+    var waypointsList = fillWaypoints()
+    directionsService.route({
+        origin: waypointsList[0].location,
+        destination: waypointsList[waypointsList.length-1].location,
+        waypoints: waypointsList,
+        travelMode: google.maps.TravelMode.WALKING
+    }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
+
+function computeTotalDistance(result) {
+    let total = 0;
+    const myroute = result.routes[0];
+
+    if (!myroute) {
+        return;
+    }
+
+    for (let i = 0; i < myroute.legs.length; i++) {
+        total += myroute.legs[i].distance.value;
+    }
+
+    total = total / 1000;
+    document.getElementById('totalDistance').innerHTML = "The total distance is: <b>" + total + "km. </b>"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
