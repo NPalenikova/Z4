@@ -1,82 +1,82 @@
 let pics = [
     {
         "filename":"1.jpg",
-        "name": "Repkové pole",
-        "description": "Pole plné repky olejnej niekde za Ružindolom",
-        "date":"6.5.2020",
-        "coordinates":[48.370037, 17.469789],
+        "name": "Mountains",
+        "description": "View of sunrise in the mountains",
+        "date":"2022-03-02",
+        "coordinates":[46.79989056750934, 13.611580653944289],
         "path":"/photos/1.jpg"
     },
     {
         "filename":"2.jpg",
-        "name": "Výhľad na hory",
-        "description": "Výhľad na východ slnka nad horami",
-        "date":"2.3.2022",
-        "coordinates":[46.80044876051801, 13.611891792061295],
+        "name": "Cactus Garden",
+        "description": "View of the cactus garden in Lanzarote",
+        "date":"2022-06-27",
+        "coordinates":[29.08107787842252, -13.473440256638664],
         "path":"/photos/2.jpg"
     },
     {
         "filename":"3.jpg",
-        "name": "Impozantný kaktus",
-        "description": "Kaktus na stene v kaktusovej záhrade",
-        "date":"27.6.2022",
+        "name": "Magnificent Cactus",
+        "description": "Cactus crawling on the wall of the cactus garden",
+        "date":"2022-06-27",
         "coordinates":[29.08107787842252, -13.473440256638664],
         "path":"/photos/3.jpg"
     },
     {
         "filename":"4.jpg",
-        "name": "Kaňon",
-        "description": "Kaňon Las Grietas",
-        "date":"28.6.2022",
-        "coordinates":[28.974528679739464, -13.635363630687099],
+        "name": "Round Colourful Cactus",
+        "description": "I cannot remember what it was called",
+        "date":"2022-06-27",
+        "coordinates":[29.08107787842252, -13.473440256638664],
         "path":"/photos/4.jpg"
     },
     {
         "filename":"5.jpg",
-        "name": "Výhľad na more",
-        "description": "Voda je modrá",
-        "date":"30.6.2022",
-        "coordinates":[28.86259907707701, -13.86020863068296],
+        "name": "Narrow passageway",
+        "description": "Small canyon Las Grietas",
+        "date":"2022-06-28",
+        "coordinates":[28.973965502730163, -13.635288531224576],
         "path":"/photos/5.jpg"
     },
     {
         "filename":"6.jpg",
-        "name": "Obloha",
-        "description": "Diera v strope",
-        "date":"5.8.2022",
-        "coordinates":[43.50873290911745, 16.4400111],
+        "name": "Sea",
+        "description": "Beautiful shades of blue",
+        "date":"2022-06-30",
+        "coordinates":[28.86139510904194, -13.860132148090809],
         "path":"/photos/6.jpg"
     },
     {
         "filename":"7.jpg",
-        "name": "Západ slnka",
-        "description": "Západ slnka nad morom",
-        "date":"6.8.2022",
-        "coordinates":[43.550957, 16.351390],
+        "name": "The Sky",
+        "description": "Aesthetically pleasing hole in the ceiling",
+        "date":"2022-08-05",
+        "coordinates":[43.508001103740966, 16.44000837879051],
         "path":"/photos/7.jpg"
     },
     {
-        "filename":"8,jpg",
-        "name": "Hmla",
-        "description": "Ranná hmla v horách",
-        "date":"30.8.2022",
+        "filename":"8.jpg",
+        "name": "Morning Fog",
+        "description": "This is what it looks like at 6 am somewhere in the woods...",
+        "date":"2022-08-06",
         "coordinates":[48.59594445550843, 19.565012994265064],
         "path":"/photos/8.jpg"
     },
     {
         "filename":"9.jpg",
-        "name": "Táborisko",
-        "description": "Takto vyzerá skautský tábor",
-        "date":"27.8.2022",
+        "name": "No More Fog",
+        "description": "... and this is what it looks like an hour later",
+        "date":"2022-08-30",
         "coordinates":[48.59594445550843, 19.565012994265064],
         "path":"/photos/9.jpg"
     },
     {
         "filename":"10.jpg",
-        "name": "Výstava",
-        "description": "Výstava kaktusov a prírodného kameňa",
-        "date":"16.9.2022",
-        "coordinates":[48.78081211355137, 18.5752974830569],
+        "name": "Beatiful Rocks",
+        "description": "Some kind of cool Slovak rock",
+        "date":"2022-08-27",
+        "coordinates":[48.780713530852424, 18.575279048993462],
         "path":"/photos/10.jpg"
     }
 ];
@@ -200,6 +200,9 @@ if(document.querySelector("body").classList.value === 'mapBody') {
 
 const fillWaypoints = () => {
     var waypoints = []
+        pics.sort(function(a, b) {
+            return ((a.date < b.date) ? -1 : ((a.date == b.date) ? 0 : 1));
+        });
     pics.forEach(pic => {
         waypoints.push({location: new google.maps.LatLng(pic.coordinates[0], pic.coordinates[1]), stopover: false})
     })
